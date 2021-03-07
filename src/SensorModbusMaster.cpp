@@ -601,6 +601,7 @@ int modbusMaster::sendCommand(byte command[], int commandLength)
     _stream->write(command, commandLength);
     _stream->flush();
     recieverEnable();
+    emptySerialBuffer(_stream);  // Clear any junk before reading command
     // Print the raw send (for debugging)
     _debugStream->print("Raw Request >>> ");
     printFrameHex(command, commandLength);
